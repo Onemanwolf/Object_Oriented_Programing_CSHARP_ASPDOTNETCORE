@@ -1,3 +1,341 @@
+# Primitives
+
+- int
+- float
+- bool
+
+
+# Manipulate integral and floating point numbers in C#
+
+
+
+## Explore integer math
+Create a directory named numbers-quickstart. Make that the current directory and run the following command:
+
+.NET Core CLI
+
+Copy
+dotnet new console -n NumbersInCSharp -o .
+Open Program.cs in your favorite editor, and replace the line Console.WriteLine("Hello World!"); with the following code:
+
+C#
+
+Copy
+int a = 18;
+int b = 6;
+int c = a + b;
+Console.WriteLine(c);
+Run this code by typing dotnet run in your command window.
+
+You've seen one of the fundamental math operations with integers. The int type represents an integer, a zero, positive, or negative whole number. You use the + symbol for addition. Other common mathematical operations for integers include:
+
+- for subtraction
+
+* for multiplication
+  / for division
+  Start by exploring those different operations. Add these lines after the line that writes the value of c:
+
+C#
+
+Copy
+
+// subtraction
+c = a - b;
+Console.WriteLine(c);
+
+// multiplication
+c = a \* b;
+Console.WriteLine(c);
+
+// division
+c = a / b;
+Console.WriteLine(c);
+Run this code by typing dotnet run in your command window.
+
+You can also experiment by writing multiple mathematics operations in the same line, if you'd like. Try c = a + b - 12 \* 17; for example. Mixing variables and constant numbers is allowed.
+
+Tip
+
+As you explore C# (or any programming language), you'll make mistakes when you write code. The compiler will find those errors and report them to you. When the output contains error messages, look closely at the example code and the code in your window to see what to fix. That exercise will help you learn the structure of C# code.
+
+You've finished the first step. Before you start the next section, let's move the current code into a separate method. That makes it easier to start working with a new example. Rename your Main method to WorkingWithIntegers and write a new Main method that calls WorkingWithIntegers. When you finish, your code should look like this:
+
+C#
+
+Copy
+using System;
+
+namespace NumbersInCSharp
+{
+class Program
+{
+static void WorkingWithIntegers()
+{
+int a = 18;
+int b = 6;
+
+            // addition
+            int c = a + b;
+            Console.WriteLine(c);
+
+            // subtraction
+            c = a - b;
+            Console.WriteLine(c);
+
+            // multiplication
+            c = a * b;
+            Console.WriteLine(c);
+
+            // division
+            c = a / b;
+            Console.WriteLine(c);
+        }
+
+        static void Main(string[] args)
+        {
+            WorkingWithIntegers();
+        }
+    }
+
+}
+Explore order of operations
+Comment out the call to WorkingWithIntegers(). It will make the output less cluttered as you work in this section:
+
+C#
+
+Copy
+//WorkingWithIntegers();
+The // starts a comment in C#. Comments are any text you want to keep in your source code but not execute as code. The compiler doesn't generate any executable code from comments.
+
+The C# language defines the precedence of different mathematics operations with rules consistent with the rules you learned in mathematics. Multiplication and division take precedence over addition and subtraction. Explore that by adding the following code to your Main method, and executing dotnet run:
+
+C#
+
+Copy
+int a = 5;
+int b = 4;
+int c = 2;
+int d = a + b \* c;
+Console.WriteLine(d);
+The output demonstrates that the multiplication is performed before the addition.
+
+You can force a different order of operation by adding parentheses around the operation or operations you want performed first. Add the following lines and run again:
+
+C#
+
+Copy
+d = (a + b) \* c;
+Console.WriteLine(d);
+Explore more by combining many different operations. Add something like the following lines at the bottom of your Main method. Try dotnet run again.
+
+C#
+
+Copy
+d = (a + b) - 6 _ c + (12 _ 4) / 3 + 12;
+Console.WriteLine(d);
+You may have noticed an interesting behavior for integers. Integer division always produces an integer result, even when you'd expect the result to include a decimal or fractional portion.
+
+If you haven't seen this behavior, try the following code at the end of your Main method:
+
+C#
+
+Copy
+int e = 7;
+int f = 4;
+int g = 3;
+int h = (e + f) / g;
+Console.WriteLine(h);
+Type dotnet run again to see the results.
+
+Before moving on, let's take all the code you've written in this section and put it in a new method. Call that new method OrderPrecedence. You should write something like this:
+
+C#
+
+Copy
+using System;
+
+namespace NumbersInCSharp
+{
+class Program
+{
+static void WorkingWithIntegers()
+{
+int a = 18;
+int b = 6;
+
+            // addition
+            int c = a + b;
+            Console.WriteLine(c);
+
+            // subtraction
+            c = a - b;
+            Console.WriteLine(c);
+
+            // multiplication
+            c = a * b;
+            Console.WriteLine(c);
+
+            // division
+            c = a / b;
+            Console.WriteLine(c);
+        }
+
+        static void OrderPrecedence()
+        {
+            int a = 5;
+            int b = 4;
+            int c = 2;
+            int d = a + b * c;
+            Console.WriteLine(d);
+
+            d = (a + b) * c;
+            Console.WriteLine(d);
+
+            d = (a + b) - 6 * c + (12 * 4) / 3 + 12;
+            Console.WriteLine(d);
+
+            int e = 7;
+            int f = 4;
+            int g = 3;
+            int h = (e  + f) / g;
+            Console.WriteLine(h);
+        }
+
+        static void Main(string[] args)
+        {
+            WorkingWithIntegers();
+
+            OrderPrecedence();
+
+        }
+    }
+
+}
+Explore integer precision and limits
+That last sample showed you that integer division truncates the result. You can get the remainder by using the modulo operator, the % character. Try the following code in your Main method:
+
+C#
+
+Copy
+int a = 7;
+int b = 4;
+int c = 3;
+int d = (a + b) / c;
+int e = (a + b) % c;
+Console.WriteLine($"quotient: {d}");
+Console.WriteLine($"remainder: {e}");
+The C# integer type differs from mathematical integers in one other way: the int type has minimum and maximum limits. Add this code to your Main method to see those limits:
+
+C#
+
+Copy
+int max = int.MaxValue;
+int min = int.MinValue;
+Console.WriteLine(\$"The range of integers is {min} to {max}");
+If a calculation produces a value that exceeds those limits, you have an underflow or overflow condition. The answer appears to wrap from one limit to the other. Add these two lines to your Main method to see an example:
+
+C#
+
+Copy
+int what = max + 3;
+Console.WriteLine(\$"An example of overflow: {what}");
+Notice that the answer is very close to the minimum (negative) integer. It's the same as min + 2. The addition operation overflowed the allowed values for integers. The answer is a very large negative number because an overflow "wraps around" from the largest possible integer value to the smallest.
+
+There are other numeric types with different limits and precision that you would use when the int type doesn't meet your needs. Let's explore those other types next.
+
+Once again, let's move the code you wrote in this section into a separate method. Name it TestLimits.
+
+Work with the double type
+The double numeric type represents a double-precision floating point number. Those terms may be new to you. A floating point number is useful to represent non-integral numbers that may be very large or small in magnitude. Double-precision is a relative term that describes the number of binary digits used to store the value. Double precision numbers have twice the number of binary digits as single-precision. On modern computers, it's more common to use double precision than single precision numbers. Single precision numbers are declared using the float keyword. Let's explore. Add the following code and see the result:
+
+C#
+
+Copy
+double a = 5;
+double b = 4;
+double c = 2;
+double d = (a + b) / c;
+Console.WriteLine(d);
+Notice that the answer includes the decimal portion of the quotient. Try a slightly more complicated expression with doubles:
+
+C#
+
+Copy
+double e = 19;
+double f = 23;
+double g = 8;
+double h = (e + f) / g;
+Console.WriteLine(h);
+The range of a double value is much greater than integer values. Try the following code below what you've written so far:
+
+C#
+
+Copy
+double max = double.MaxValue;
+double min = double.MinValue;
+Console.WriteLine(\$"The range of double is {min} to {max}");
+These values are printed out in scientific notation. The number to the left of the E is the significand. The number to the right is the exponent, as a power of 10.
+
+Just like decimal numbers in math, doubles in C# can have rounding errors. Try this code:
+
+C#
+
+Copy
+double third = 1.0 / 3.0;
+Console.WriteLine(third);
+You know that 0.3 repeating isn't exactly the same as 1/3.
+
+Challenge
+
+Try other calculations with large numbers, small numbers, multiplication, and division using the double type. Try more complicated calculations.
+
+After you've spent some time with the challenge, take the code you've written and place it in a new method. Name that new method WorkWithDoubles.
+
+Work with decimal types
+You've seen the basic numeric types in C#: integers and doubles. There's one other type to learn: the decimal type. The decimal type has a smaller range but greater precision than double. Let's take a look:
+
+C#
+
+Copy
+decimal min = decimal.MinValue;
+decimal max = decimal.MaxValue;
+Console.WriteLine(\$"The range of the decimal type is {min} to {max}");
+Notice that the range is smaller than the double type. You can see the greater precision with the decimal type by trying the following code:
+
+C#
+
+Copy
+double a = 1.0;
+double b = 3.0;
+Console.WriteLine(a / b);
+
+decimal c = 1.0M;
+decimal d = 3.0M;
+Console.WriteLine(c / d);
+The M suffix on the numbers is how you indicate that a constant should use the decimal type. Otherwise, the compiler assumes the double type.
+
+Note
+
+The letter M was chosen as the most visually distinct letter between the double and decimal keywords.
+
+Notice that the math using the decimal type has more digits to the right of the decimal point.
+
+Challenge
+
+Now that you've seen the different numeric types, write code that calculates the area of a circle whose radius is 2.50 centimeters. Remember that the area of a circle is the radius squared multiplied by PI. One hint: .NET contains a constant for PI, Math.PI that you can use for that value. Math.PI, like all constants declared in the System.Math namespace, is a double value. For that reason, you should use double instead of decimal values for this challenge.
+
+You should get an answer between 19 and 20. You can check your answer by looking at the finished sample code on GitHub.
+
+Try some other formulas if you'd like.
+
+You've completed the "Numbers in C#" quickstart. You can continue with the Branches and loops quickstart in your own development environment.
+
+You can learn more about numbers in C# in the following articles:
+
+Integral numeric types
+Floating-point numeric types
+Built-in numeric conversions
+
 # Types and members
 
 ## Classes and objects
@@ -880,14 +1218,14 @@ The following lists the kinds of statements that can be used:
 - `lock` statement.
 - `using` statement.
 
-
 # Major language areas
 
-
 ## Arrays, collections, and LINQ
+
 C# and .NET provide many different collection types. Arrays have syntax defined by the language. Generic collection types are listed in the [System.Collections.Generic](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic) namespace. Specialized collections include [System.Span<T>](https://docs.microsoft.com/en-us/dotnet/api/system.span-1) for accessing continuous memory on the stack frame, and [System.Memory<T>](https://docs.microsoft.com/en-us/dotnet/api/system.memory-1) for accessing continuous memory on the managed heap. All collections, including arrays, [Span<T>](https://docs.microsoft.com/en-us/dotnet/api/system.span-1), and [Memory<T>](https://docs.microsoft.com/en-us/dotnet/api/system.memory-1) share a unifying principle for iteration. You use the [System.Collections.Generic.IEnumerable<T>](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1) interface. This unifying principle means that any of the collection types can be used with LINQ queries or other algorithms. You write methods using [IEnumerable<T>](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1) and those algorithms work with any collection.
 
 ## Arrays
+
 An array is a data structure that contains a number of variables that are accessed through computed indices. The variables contained in an array, also called the elements of the array, are all of the same type. This type is called the element type of the [array](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/).
 
 Array types are reference types, and the declaration of an array variable simply sets aside space for a reference to an array instance. Actual array instances are created dynamically at runtime using the new operator. The new operation specifies the length of the new array instance, which is then fixed for the lifetime of the instance. The indices of the elements of an array range from 0 to Length - 1. The new operator automatically initializes the elements of an array to their default value, which, for example, is zero for all numeric types and null for all reference types.
@@ -978,7 +1316,7 @@ Console.WriteLine($"    was {weatherData.LowTemp} and {weatherData.HighTemp}.");
 //     was 5 and 30.
 ```
 
-An interpolated string is declared using the $ token. String interpolation evaluates the expressions between { and }, then converts the result to a string, and replaces the text between the brackets with the string result of the expression. The : in the first expression, {weatherData.Date:MM-DD-YYYY} specifies the format string. In the preceding example, it specifies that the date should be printed in "MM-DD-YYYY" format.
+An interpolated string is declared using the \$ token. String interpolation evaluates the expressions between { and }, then converts the result to a string, and replaces the text between the brackets with the string result of the expression. The : in the first expression, {weatherData.Date:MM-DD-YYYY} specifies the format string. In the preceding example, it specifies that the date should be printed in "MM-DD-YYYY" format.
 
 ## Pattern matching
 
