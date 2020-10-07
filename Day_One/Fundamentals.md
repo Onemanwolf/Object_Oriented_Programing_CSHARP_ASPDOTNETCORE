@@ -819,7 +819,7 @@ The first `Console.WriteLine` outputs True because the two lists contain the sam
 
 ## Finalizers
 
-A _finalizer_ is a member that implements the actions required to finalize an instance of a class. Typically, a finalizer is needed to release unmanaged resources. Finalizers can't have parameters, they can't have accessibility modifiers, and they can't be invoked explicitly. The finalizer for an instance is invoked automatically during garbage collection. For more details, see the article on finalizers.
+A _finalizer_ is a member that implements the actions required to finalize an instance of a class. Typically, a finalizer is needed to release unmanaged resources. Finalizers can't have parameters, they can't have accessibility modifiers, and they can't be invoked explicitly. The finalizer for an instance is invoked automatically during garbage collection. For more details, see the article on [finalizers](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/destructors).
 
 The garbage collector is allowed wide latitude in deciding when to collect objects and run finalizers. Specifically, the timing of finalizer invocations isn't deterministic, and finalizers may be executed on any thread. For these and other reasons, classes should implement finalizers only when no other solutions are feasible.
 
@@ -840,9 +840,9 @@ Precedence and associativity can be controlled using parentheses. For example, `
 
 Most operators can be [overloaded](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading). Operator overloading permits user-defined operator implementations to be specified for operations where one or both of the operands are of a `user-defined class` or `struct` type.
 
-C# provides a number of operators to perform arithmetic, logical, bitwise and shift operations and equality and order comparisons.
+C# provides a number of operators to perform [arithmetic](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/arithmetic-operators), [logical](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/boolean-logical-operators), [bitwise](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators) and [shift](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/bitwise-and-shift-operators) operations and [equality](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/equality-operators) and [order](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/comparison-operators) comparisons.
 
-For the complete list of C# operators ordered by precedence level, see C# operators.
+For the complete list of C# operators ordered by precedence level, see [C# operators](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/).
 
 ## Statements
 
@@ -864,21 +864,268 @@ The following lists the kinds of statements that can be used:
 - Local variable declaration.
 - Local constant declaration.
 - Expression statement.
-- if statement.
-- switch statement.
-- while statement.
-- do statement.
-- for statement.
-- foreach statement.
-- break statement.
-- continue statement.
-- goto statement.
-- return statement.
-- yield statement.
-- throw statements and try statements.
-- checked and unchecked statements.
-- lock statement.
-- using statement.
+- `if` statement.
+- `switch` statement.
+- `while` statement.
+- `do` statement.
+- `for` statement.
+- `foreach` statement.
+- `break` statement.
+- `continue` statement.
+- `goto` statement.
+- `return` statement.
+- `yield` statement.
+- `throw` statements and `try` statements.
+- `checked` and `unchecked` statements.
+- `lock` statement.
+- `using` statement.
+
+
+# Major language areas
+
+
+## Arrays, collections, and LINQ
+C# and .NET provide many different collection types. Arrays have syntax defined by the language. Generic collection types are listed in the [System.Collections.Generic](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic) namespace. Specialized collections include [System.Span<T>](https://docs.microsoft.com/en-us/dotnet/api/system.span-1) for accessing continuous memory on the stack frame, and [System.Memory<T>](https://docs.microsoft.com/en-us/dotnet/api/system.memory-1) for accessing continuous memory on the managed heap. All collections, including arrays, [Span<T>](https://docs.microsoft.com/en-us/dotnet/api/system.span-1), and [Memory<T>](https://docs.microsoft.com/en-us/dotnet/api/system.memory-1) share a unifying principle for iteration. You use the [System.Collections.Generic.IEnumerable<T>](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1) interface. This unifying principle means that any of the collection types can be used with LINQ queries or other algorithms. You write methods using [IEnumerable<T>](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1) and those algorithms work with any collection.
+
+## Arrays
+An array is a data structure that contains a number of variables that are accessed through computed indices. The variables contained in an array, also called the elements of the array, are all of the same type. This type is called the element type of the [array](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/arrays/).
+
+Array types are reference types, and the declaration of an array variable simply sets aside space for a reference to an array instance. Actual array instances are created dynamically at runtime using the new operator. The new operation specifies the length of the new array instance, which is then fixed for the lifetime of the instance. The indices of the elements of an array range from 0 to Length - 1. The new operator automatically initializes the elements of an array to their default value, which, for example, is zero for all numeric types and null for all reference types.
+
+The following example creates an array of int elements, initializes the array, and prints out the contents of the array.
+
+```C#
+//Copy
+int[] a = new int[10];
+for (int i = 0; i < a.Length; i++)
+{
+    a[i] = i * i;
+}
+for (int i = 0; i < a.Length; i++)
+{
+    Console.WriteLine($"a[{i}] = {a[i]}");
+}
+```
+
+This example creates and operates on a single-dimensional array. C# also supports multi-dimensional arrays. The number of dimensions of an array type, also known as the rank of the array type, is one plus the number of commas written between the square brackets of the array type. The following example allocates a single-dimensional, a two-dimensional, and a three-dimensional array, respectively.
+
+```C#
+//Copy
+int[] a1 = new int[10];
+int[,] a2 = new int[10, 5];
+int[,,] a3 = new int[10, 5, 2];
+```
+
+The a1 array contains 10 elements, the a2 array contains 50 (10 × 5) elements, and the a3 array contains 100 (10 × 5 × 2) elements. The element type of an array can be any type, including an array type. An array with elements of an array type is sometimes called a jagged array because the lengths of the element arrays don't all have to be the same. The following example allocates an array of arrays of int:
+
+```C#
+//Copy
+int[][] a = new int[3][];
+a[0] = new int[10];
+a[1] = new int[5];
+a[2] = new int[20];
+```
+
+The first line creates an array with three elements, each of type int[] and each with an initial value of null. The next lines then initialize the three elements with references to individual array instances of varying lengths.
+
+The new operator permits the initial values of the array elements to be specified using an array initializer, which is a list of expressions written between the delimiters { and }. The following example allocates and initializes an int[] with three elements.
+
+```C#
+//Copy
+int[] a = new int[] { 1, 2, 3 };
+```
+
+The length of the array is inferred from the number of expressions between { and }. Local variable and field declarations can be shortened further such that the array type doesn't have to be restated.
+
+```C#
+//Copy
+int[] a = { 1, 2, 3 };
+```
+
+Both of the previous examples are equivalent to the following code:
+
+```C#
+//Copy
+int[] t = new int[3];
+t[0] = 1;
+t[1] = 2;
+t[2] = 3;
+int[] a = t;
+```
+
+The foreach statement can be used to enumerate the elements of any collection. The following code enumerates the array from the preceding example:
+
+```C#
+//Copy
+foreach (int item in a)
+{
+    Console.WriteLine(item);
+}
+```
+
+The foreach statement uses the [IEnumerable<T>](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ienumerable-1) interface, so can work with any collection.
+
+## String interpolation
+
+C# [string interpolation](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated) enables you to format strings by defining expressions whose results are placed in a format string. For example, the following example prints the temperature on a given day from a set of weather data:
+
+```C#
+//Copy
+Console.WriteLine($"The low and high temperature on {weatherData.Date:MM-DD-YYYY}");
+Console.WriteLine($"    was {weatherData.LowTemp} and {weatherData.HighTemp}.");
+// Output (similar to):
+// The low and high temperature on 08-11-2020
+//     was 5 and 30.
+```
+
+An interpolated string is declared using the $ token. String interpolation evaluates the expressions between { and }, then converts the result to a string, and replaces the text between the brackets with the string result of the expression. The : in the first expression, {weatherData.Date:MM-DD-YYYY} specifies the format string. In the preceding example, it specifies that the date should be printed in "MM-DD-YYYY" format.
+
+## Pattern matching
+
+The C# language provides [pattern matching](https://docs.microsoft.com/en-us/dotnet/csharp/pattern-matching) expressions to query the state of an object and execute code based on that state. You can inspect types and the values of properties and fields to determine which action to take. The switch expression is the primary expression for pattern matching.
+
+## Delegates and lambda expressions
+
+A [delegate type](https://docs.microsoft.com/en-us/dotnet/csharp/delegates-overview) represents references to methods with a particular parameter list and return type. Delegates make it possible to treat methods as entities that can be assigned to variables and passed as parameters. Delegates are similar to the concept of function pointers found in some other languages. Unlike function pointers, delegates are object-oriented and type-safe.
+
+The following example declares and uses a delegate type named Function.
+
+```C#
+//Copy
+delegate double Function(double x);
+
+class Multiplier
+{
+    double _factor;
+
+    public Multiplier(double factor) => _factor = factor;
+
+    public double Multiply(double x) => x * _factor;
+}
+
+class DelegateExample
+{
+    static double[] Apply(double[] a, Function f)
+    {
+        var result = new double[a.Length];
+        for (int i = 0; i < a.Length; i++) result[i] = f(a[i]);
+        return result;
+    }
+
+    public static void Main()
+    {
+        double[] a = { 0.0, 0.5, 1.0 };
+        double[] squares = Apply(a, (x) => x * x);
+        double[] sines = Apply(a, Math.Sin);
+        Multiplier m = new Multiplier(2.0);
+        double[] doubles = Apply(a, m.Multiply);
+    }
+}
+```
+
+An instance of the Function delegate type can reference any method that takes a double argument and returns a double value. The Apply method applies a given Function to the elements of a double[], returning a double[] with the results. In the Main method, Apply is used to apply three different functions to a double[].
+
+A delegate can reference either a static method (such as Square or Math.Sin in the previous example) or an instance method (such as m.Multiply in the previous example). A delegate that references an instance method also references a particular object, and when the instance method is invoked through the delegate, that object becomes this in the invocation.
+
+Delegates can also be created using anonymous functions, which are "inline methods" that are created when declared. Anonymous functions can see the local variables of the surrounding methods. The following example doesn't create a class:
+
+```C#
+//Copy
+double[] doubles = Apply(a, (double x) => x * 2.0);
+```
+
+A delegate doesn't know or care about the class of the method it references. All that matters is that the referenced method has the same parameters and return type as the delegate.
+
+## async / await
+
+C# supports asynchronous programs with two keywords: async and await. You add the async modifier to a method declaration to declare the method is asynchronous. The await operator tells the compiler to asynchronously await for a result to finish. Control is returned to the caller, and the method returns a structure that manages the state of the asynchronous work. The structure is typically a [System.Threading.Tasks.Task<TResult>](https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.task-1), but can be any type that supports the awaiter pattern. These features enable you to write code that reads as its synchronous counterpart, but executes asynchronously. For example, the following code downloads the home page for [Microsoft docs](https://docs.microsoft.com/en-us/):
+
+```C#
+//Copy
+public async Task<int> RetrieveDocsHomePage()
+{
+    var client = new HttpClient();
+    byte[] content = await client.GetByteArrayAsync("https://docs.microsoft.com/");
+
+    Console.WriteLine($"{nameof(RetrieveDocsHomePage)}: Finished downloading.");
+    return content.Length;
+}
+```
+
+This small sample shows the major features for asynchronous programming:
+
+The method declaration includes the async modifier.
+The body of the method awaits the return of the GetByteArrayAsync method.
+The type specified in the return statement matches the type argument in the `Task<T>` declaration for the method. (A method that returns a Task would use return statements without any argument).
+
+## Attributes
+
+Types, members, and other entities in a C# program support modifiers that control certain aspects of their behavior. For example, the accessibility of a method is controlled using the public, protected, internal, and private modifiers. C# generalizes this capability such that user-defined types of declarative information can be attached to program entities and retrieved at run-time. Programs specify this additional declarative information by defining and using [attributes](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/).
+
+The following example declares a HelpAttribute attribute that can be placed on program entities to provide links to their associated documentation.
+
+```C#
+//Copy
+public class HelpAttribute : Attribute
+{
+    string _url;
+    string _topic;
+
+    public HelpAttribute(string url) => _url = url;
+
+    public string Url => _url;
+
+    public string Topic
+    {
+        get => _topic;
+        set => _topic = value;
+    }
+}
+```
+
+All attribute classes derive from the [Attribute](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/) base class provided by the .NET library. Attributes can be applied by giving their name, along with any arguments, inside square brackets just before the associated declaration. If an attribute’s name ends in Attribute, that part of the name can be omitted when the attribute is referenced. For example, the `HelpAttribute` can be used as follows.
+
+```C#
+//Copy
+[Help("https://docs.microsoft.com/dotnet/csharp/tour-of-csharp/features")]
+public class Widget
+{
+    [Help("https://docs.microsoft.com/dotnet/csharp/tour-of-csharp/features",
+    Topic = "Display")]
+    public void Display(string text) { }
+}
+```
+
+This example attaches a `HelpAttribute` to the `Widget` class. It adds another `HelpAttribute` to the Display method in the class. The public constructors of an attribute class control the information that must be provided when the attribute is attached to a program entity. Additional information can be provided by referencing public read-write properties of the attribute class (such as the reference to the `Topic` property previously).
+
+The metadata defined by attributes can be read and manipulated at runtime using reflection. When a particular attribute is requested using this technique, the constructor for the attribute class is invoked with the information provided in the program source, and the resulting attribute instance is returned. If additional information was provided through properties, those properties are set to the given values before the attribute instance is returned.
+
+The following code sample demonstrates how to get the HelpAttribute instances associated to the `Widget` class and its `Display` method.
+
+```C#
+//Copy
+Type widgetType = typeof(Widget);
+
+object[] widgetClassAttributes = widgetType.GetCustomAttributes(typeof(HelpAttribute), false);
+
+if (widgetClassAttributes.Length > 0)
+{
+    HelpAttribute attr = (HelpAttribute)widgetClassAttributes[0];
+    Console.WriteLine($"Widget class help URL : {attr.Url} - Related topic : {attr.Topic}");
+}
+
+System.Reflection.MethodInfo displayMethod = widgetType.GetMethod(nameof(Widget.Display));
+
+object[] displayMethodAttributes = displayMethod.GetCustomAttributes(typeof(HelpAttribute), false);
+
+if (displayMethodAttributes.Length > 0)
+{
+    HelpAttribute attr = (HelpAttribute)displayMethodAttributes[0];
+    Console.WriteLine($"Display method help URL : {attr.Url} - Related topic : {attr.Topic}");
+}
+```
+
+# Learn more
 
 [Introduction to C# Tutorials](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/intro-to-csharp/)
 
