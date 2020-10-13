@@ -9,7 +9,8 @@ Day One
 
 Day Two
 
-- [Linq Entity Framework]()
-- [Async]()
-- [Intro Asp.net Core]()
+- [Intro Asp.net Core](https://github.com/Onemanwolf/Object_Oriented_Programing_CSHARP_ASPDOTNETCORE/blob/main/Day_Two/Intro%20Asp.net%20Core.md)
+- [Async](https://github.com/Onemanwolf/Object_Oriented_Programing_CSHARP_ASPDOTNETCORE/blob/main/Day_Two/Async.md)
+- [Linq Entity Framework](https://github.com/Onemanwolf/Object_Oriented_Programing_CSHARP_ASPDOTNETCORE/blob/main/Day_Two/WebApi_EFCore.md)
+
 
