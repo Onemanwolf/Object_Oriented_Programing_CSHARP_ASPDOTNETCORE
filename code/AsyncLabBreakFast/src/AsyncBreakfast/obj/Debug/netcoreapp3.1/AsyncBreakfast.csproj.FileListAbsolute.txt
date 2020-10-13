@@ -1,0 +1,13 @@
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\netcoreapp3.1\AsyncBreakfast.csprojAssemblyReference.cache
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\netcoreapp3.1\AsyncBreakfast.AssemblyInfoInputs.cache
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\netcoreapp3.1\AsyncBreakfast.AssemblyInfo.cs
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\netcoreapp3.1\AsyncBreakfast.csproj.CoreCompileInputs.cache
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\netcoreapp3.1\AsyncBreakfast.exe
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\netcoreapp3.1\AsyncBreakfast.deps.json
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\netcoreapp3.1\AsyncBreakfast.runtimeconfig.json
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\netcoreapp3.1\AsyncBreakfast.runtimeconfig.dev.json
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\netcoreapp3.1\AsyncBreakfast.dll
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\netcoreapp3.1\AsyncBreakfast.pdb
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\netcoreapp3.1\AsyncBreakfast.dll
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\netcoreapp3.1\AsyncBreakfast.pdb
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\netcoreapp3.1\AsyncBreakfast.genruntimeconfig.cache

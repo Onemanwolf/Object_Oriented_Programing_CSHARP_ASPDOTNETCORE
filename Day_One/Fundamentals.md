@@ -1,4 +1,4 @@
-Types and variables
+# Types and variables
 
 There are two kinds of types in C#: value types and reference types. Variables of value types directly contain their data whereas variables of reference types store references to their data, the latter being known as objects. With reference types, it's possible for two variables to reference the same object and possible for operations on one variable to affect the object referenced by the other variable. With value types, the variables each have their own copy of the data, and it isn't possible for operations on one to affect the other (except for ref and out parameter variables).
 
@@ -8,81 +8,86 @@ C#'s value types are further divided into simple types, enum types, struct types
 
 The following outline provides an overview of C#'s type system.
 
-Value types
-Simple types
-Signed integral: sbyte, short, int, long
-Unsigned integral: byte, ushort, uint, ulong
-Unicode characters: char, which represents a UTF-16 code unit
-IEEE binary floating-point: float, double
-High-precision decimal floating-point: decimal
-Boolean: bool, which represents Boolean values—values that are either true or false
-Enum types
-User-defined types of the form enum E {...}. An enum type is a distinct type with named constants. Every enum type has an underlying type, which must be one of the eight integral types. The set of values of an enum type is the same as the set of values of the underlying type.
-Struct types
-User-defined types of the form struct S {...}
-Nullable value types
-Extensions of all other value types with a null value
-Tuple value types
-User-defined types of the form (T1, T2, ...)
-Reference types
-Class types
-Ultimate base class of all other types: object
-Unicode strings: string, which represents a sequence of UTF-16 code units
-User-defined types of the form class C {...}
-Interface types
-User-defined types of the form interface I {...}
-Array types
-Single-dimensional, multi-dimensional and jagged. For example: int[], int[,], and int[][]
-Delegate types
-User-defined types of the form delegate int D(...)
+- Value types
+  - Simple types
+    - Signed integral: sbyte, short, int, long
+    - Unsigned integral: byte, ushort, uint, ulong
+    - Unicode characters: char, which represents a UTF-16 code unit
+    - IEEE binary floating-point: float, double
+    - High-precision decimal floating-point: decimal
+    - Boolean: bool, which represents Boolean values—values that are either true or false
+- Enum types
+  - User-defined types of the form enum E {...}. An enum type is a distinct type with named constants. Every enum type has an underlying type, which must be one of the eight integral types. The set of values of an enum type is the same as the set of values of the underlying type.
+- Struct types
+  - User-defined types of the form struct S {...}
+- Nullable value types
+  - Extensions of all other value types with a null value
+- Tuple value types
+  - User-defined types of the form (T1, T2, ...)
+- Reference types
+
+  - Class types
+  - Ultimate base class of all other types: object
+
+  - Unicode strings: string, which represents a sequence of UTF-16 code units
+  - User-defined types of the form class C {...}
+  - Interface types
+  - User-defined types of the form interface I {...}
+  - Array types
+    - Single-dimensional, multi-dimensional and jagged. For example: int[], int[,], and int[][]
+  - Delegate types
+    - User-defined types of the form delegate int D(...)
+
 C# programs use type declarations to create new types. A type declaration specifies the name and the members of the new type. Six of C#'s categories of types are user-definable: class types, struct types, interface types, enum types, delegate types and tuple value types.
 
-A class type defines a data structure that contains data members (fields) and function members (methods, properties, and others). Class types support single inheritance and polymorphism, mechanisms whereby derived classes can extend and specialize base classes.
-A struct type is similar to a class type in that it represents a structure with data members and function members. However, unlike classes, structs are value types and don't typically require heap allocation. Struct types don't support user-specified inheritance, and all struct types implicitly inherit from type object.
-An interface type defines a contract as a named set of public members. A class or struct that implements an interface must provide implementations of the interface's members. An interface may inherit from multiple base interfaces, and a class or struct may implement multiple interfaces.
-A delegate type represents references to methods with a particular parameter list and return type. Delegates make it possible to treat methods as entities that can be assigned to variables and passed as parameters. Delegates are analogous to function types provided by functional languages. They're also similar to the concept of function pointers found in some other languages. Unlike function pointers, delegates are object-oriented and type-safe.
-The class, struct, interface, and delegate types all support generics, whereby they can be parameterized with other types.
+- A `class` type defines a data structure that contains data members (fields) and function members (methods, properties, and others). Class types support single inheritance and polymorphism, mechanisms whereby derived classes can extend and specialize base classes.
+- A `struct` type is similar to a class type in that it represents a structure with data members and function members. However, unlike classes, `structs` are value types and don't typically require heap allocation. Struct types don't support user-specified inheritance, and all struct types implicitly inherit from type object.
+- An `interface` type defines a contract as a named set of public members. A class or struct that implements an interface must provide implementations of the interface's members. An interface may inherit from multiple base interfaces, and a class or struct may implement multiple interfaces.
+- A `delegate` type represents references to methods with a particular parameter list and return type. Delegates make it possible to treat methods as entities that can be assigned to variables and passed as parameters. Delegates are analogous to function types provided by functional languages. They're also similar to the concept of function pointers found in some other languages. Unlike function pointers, delegates are object-oriented and type-safe.
 
-C# supports single-dimensional and multi-dimensional arrays of any type. Unlike the types listed above, array types don't have to be declared before they can be used. Instead, array types are constructed by following a type name with square brackets. For example, int[] is a single-dimensional array of int, int[,] is a two-dimensional array of int, and int[][] is a single-dimensional array of single-dimensional arrays, or a "jagged" array, of int.
+  The `class`, `struct`, `interface`, and `delegate` types all support generics, whereby they can be parameterized with other types.
+
+C# supports single-dimensional and multi-dimensional arrays of any type. Unlike the types listed above, array types don't have to be declared before they can be used. Instead, array types are constructed by following a type name with square brackets. For example, `int[]` is a single-dimensional array of int, int[,] is a two-dimensional array of int, and `int[][]` is a single-dimensional array of single-dimensional arrays, or a "jagged" array, of int.
 
 Nullable types don't require a separate definition. For each non-nullable type T, there's a corresponding nullable type T?, which can hold an additional value, null. For instance, int? is a type that can hold any 32-bit integer or the value null, and string? is a type that can hold any string or the value null.
 
 C#'s type system is unified such that a value of any type can be treated as an object. Every type in C# directly or indirectly derives from the object class type, and object is the ultimate base class of all types. Values of reference types are treated as objects simply by viewing the values as type object. Values of value types are treated as objects by performing boxing and unboxing operations. In the following example, an int value is converted to object and back again to int.
 
-C#
+```C#
 
-Copy
 int i = 123;
 object o = i; // Boxing
 int j = (int)o; // Unboxing
+```
+
 When a value of a value type is assigned to an object reference, a "box" is allocated to hold the value. That box is an instance of a reference type, and the value is copied into that box. Conversely, when an object reference is cast to a value type, a check is made that the referenced object is a box of the correct value type. If the check succeeds, the value in the box is copied to the value type.
 
 C#'s unified type system effectively means that value types are treated as object references "on demand." Because of the unification, general-purpose libraries that use type object can be used with all types that derive from object, including both reference types and value types.
 
 There are several kinds of variables in C#, including fields, array elements, local variables, and parameters. Variables represent storage locations. Every variable has a type that determines what values can be stored in the variable, as shown below.
 
-Non-nullable value type
-A value of that exact type
-Nullable value type
-A null value or a value of that exact type
-object
-A null reference, a reference to an object of any reference type, or a reference to a boxed value of any value type
-Class type
-A null reference, a reference to an instance of that class type, or a reference to an instance of a class derived from that class type
-Interface type
-A null reference, a reference to an instance of a class type that implements that interface type, or a reference to a boxed value of a value type that implements that interface type
-Array type
-A null reference, a reference to an instance of that array type, or a reference to an instance of a compatible array type
-Delegate type
-A null reference or a reference to an instance of a compatible delegate type
-Program structure
-The key organizational concepts in C# are programs, namespaces, types, members, and assemblies. Programs declare types, which contain members and can be organized into namespaces. Classes, structs, and interfaces are examples of types. Fields, methods, properties, and events are examples of members. When C# programs are compiled, they're physically packaged into assemblies. Assemblies typically have the file extension .exe or .dll, depending on whether they implement applications or libraries, respectively.
+- Non-nullable value type
+  - A value of that exact type
+- Nullable value type
+  - A null value or a value of that exact type
+- object
+  - A null reference, a reference to an object of any reference type, or a reference to a boxed value of any value type
+- Class type
+  - A null reference, a reference to an instance of that class type, or a reference to an instance of a class derived from that class type
+- Interface type
+  - A null reference, a reference to an instance of a class type that implements that interface type, or a reference to a boxed value of a value type that implements that interface type
+- Array type
+  - A null reference, a reference to an instance of that array type, or a reference to an instance of a compatible array type
+- Delegate type
+  - A null reference or a reference to an instance of a compatible delegate type
+
+# Program structure
+
+The key organizational concepts in C# are [programs](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/inside-a-program/), [namespaces](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/namespaces/), [types](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/), members, and [assemblies](https://docs.microsoft.com/en-us/dotnet/standard/assembly/). Programs declare types, which contain members and can be organized into namespaces. Classes, structs, and interfaces are examples of types. Fields, methods, properties, and events are examples of members. When C# programs are compiled, they're physically packaged into assemblies. Assemblies typically have the file extension .exe or .dll, depending on whether they implement applications or libraries, respectively.
 
 As a small example, consider an assembly that contains the following code:
 
-C#
-
-Copy
+```C#
 using System;
 
 namespace Acme.Collections
@@ -122,19 +127,19 @@ Entry \_top;
     }
 
 }
+```
+
 The fully qualified name of this class is Acme.Collections.Stack. The class contains several members: a field named top, two methods named Push and Pop, and a nested class named Entry. The Entry class further contains three members: a field named next, a field named data, and a constructor. The Stack is a generic class. It has one type parameter, T that is replaced with a concrete type when it's used.
 
-Note
-
-A stack is a "first in - last out" (FILO) collection. New elements are added to the top of the stack. When an element is removed, it is removed from the top of the stack.
+> Note
+>
+> A stack is a "first in - last out" (FILO) collection. New elements are added to the top of the stack. When an element is removed, it is removed from the top of the stack.
 
 Assemblies contain executable code in the form of Intermediate Language (IL) instructions, and symbolic information in the form of metadata. Before it's executed, the Just-In-Time (JIT) compiler of .NET Common Language Runtime converts the IL code in an assembly to processor-specific code.
 
 Because an assembly is a self-describing unit of functionality containing both code and metadata, there's no need for #include directives and header files in C#. The public types and members contained in a particular assembly are made available in a C# program simply by referencing that assembly when compiling the program. For example, this program uses the Acme.Collections.Stack class from the acme.dll assembly:
 
-C#
-
-Copy
+```C#
 using System;
 using Acme.Collections;
 
@@ -151,15 +156,11 @@ Console.WriteLine(s.Pop()); // stack contains 1
 Console.WriteLine(s.Pop()); // stack is empty
 }
 }
+```
+
 To compile this program, you would need to reference the assembly containing the stack class defined in the earlier example.
 
 C# programs can be stored in several source files. When a C# program is compiled, all of the source files are processed together, and the source files can freely reference each other. Conceptually, it's as if all the source files were concatenated into one large file before being processed. Forward declarations are never needed in C# because, with few exceptions, declaration order is insignificant. C# doesn't limit a source file to declaring only one public type nor does it require the name of the source file to match a type declared in the source file.
-
-# Primitives
-
-- int
-- float
-- bool
 
 # Manipulate integral and floating point numbers in C#
 
@@ -167,19 +168,21 @@ C# programs can be stored in several source files. When a C# program is compiled
 
 Create a directory named numbers-quickstart. Make that the current directory and run the following command:
 
-.NET Core CLI
-
-Copy
+```.NET Core CLI
 dotnet new console -n NumbersInCSharp -o .
-Open Program.cs in your favorite editor, and replace the line Console.WriteLine("Hello World!"); with the following code:
+```
 
-C#
+Open Program.cs in your favorite editor, and replace the line Console.WriteLine("Hello World!");
 
-Copy
+with the following code:
+
+```C#
 int a = 18;
 int b = 6;
 int c = a + b;
 Console.WriteLine(c);
+```
+
 Run this code by typing dotnet run in your command window.
 
 You've seen one of the fundamental math operations with integers. The int type represents an integer, a zero, positive, or negative whole number. You use the + symbol for addition. Other common mathematical operations for integers include:
@@ -190,9 +193,7 @@ You've seen one of the fundamental math operations with integers. The int type r
   / for division
   Start by exploring those different operations. Add these lines after the line that writes the value of c:
 
-C#
-
-Copy
+```C#
 
 // subtraction
 c = a - b;
@@ -205,19 +206,21 @@ Console.WriteLine(c);
 // division
 c = a / b;
 Console.WriteLine(c);
+
+```
+
 Run this code by typing dotnet run in your command window.
 
 You can also experiment by writing multiple mathematics operations in the same line, if you'd like. Try c = a + b - 12 \* 17; for example. Mixing variables and constant numbers is allowed.
 
-Tip
-
-As you explore C# (or any programming language), you'll make mistakes when you write code. The compiler will find those errors and report them to you. When the output contains error messages, look closely at the example code and the code in your window to see what to fix. That exercise will help you learn the structure of C# code.
+> Tip
+>
+> As you explore C# (or any programming language), you'll make mistakes when you write code. The compiler will find those errors and report them to you. When the output contains error messages, look closely at the example code and the code in your window to see what to fix. That exercise will help you learn the structure of C# code.
 
 You've finished the first step. Before you start the next section, let's move the current code into a separate method. That makes it easier to start working with a new example. Rename your Main method to WorkingWithIntegers and write a new Main method that calls WorkingWithIntegers. When you finish, your code should look like this:
 
-C#
+```C#
 
-Copy
 using System;
 
 namespace NumbersInCSharp
@@ -253,60 +256,68 @@ int b = 6;
     }
 
 }
-Explore order of operations
+```
+
+# Explore order of operations
+
 Comment out the call to WorkingWithIntegers(). It will make the output less cluttered as you work in this section:
 
-C#
+```C#
 
-Copy
 //WorkingWithIntegers();
+```
+
 The // starts a comment in C#. Comments are any text you want to keep in your source code but not execute as code. The compiler doesn't generate any executable code from comments.
 
-The C# language defines the precedence of different mathematics operations with rules consistent with the rules you learned in mathematics. Multiplication and division take precedence over addition and subtraction. Explore that by adding the following code to your Main method, and executing dotnet run:
+The C# language defines the precedence of different mathematics operations with rules consistent with the rules you learned in mathematics. Multiplication and division take precedence over addition and subtraction. Explore that by adding the following code to your `Main` method, and executing dotnet run:
 
-C#
-
-Copy
+```C#
 int a = 5;
 int b = 4;
 int c = 2;
 int d = a + b \* c;
 Console.WriteLine(d);
+```
+
 The output demonstrates that the multiplication is performed before the addition.
 
 You can force a different order of operation by adding parentheses around the operation or operations you want performed first. Add the following lines and run again:
 
-C#
+```C#
 
-Copy
 d = (a + b) \* c;
 Console.WriteLine(d);
+
+```
+
 Explore more by combining many different operations. Add something like the following lines at the bottom of your Main method. Try dotnet run again.
 
-C#
+```C#
 
-Copy
 d = (a + b) - 6 _ c + (12 _ 4) / 3 + 12;
+
 Console.WriteLine(d);
+```
+
 You may have noticed an interesting behavior for integers. Integer division always produces an integer result, even when you'd expect the result to include a decimal or fractional portion.
 
 If you haven't seen this behavior, try the following code at the end of your Main method:
 
-C#
+```C#
 
-Copy
 int e = 7;
 int f = 4;
 int g = 3;
 int h = (e + f) / g;
 Console.WriteLine(h);
-Type dotnet run again to see the results.
+```
+
+Type `dotnet run` again to see the results.
 
 Before moving on, let's take all the code you've written in this section and put it in a new method. Call that new method OrderPrecedence. You should write something like this:
 
-C#
+```C#
 
-Copy
 using System;
 
 namespace NumbersInCSharp
@@ -366,12 +377,13 @@ int b = 6;
     }
 
 }
-Explore integer precision and limits
+```
+
+# Explore integer precision and limits
+
 That last sample showed you that integer division truncates the result. You can get the remainder by using the modulo operator, the % character. Try the following code in your Main method:
 
-C#
-
-Copy
+```C#
 int a = 7;
 int b = 4;
 int c = 3;
@@ -379,87 +391,90 @@ int d = (a + b) / c;
 int e = (a + b) % c;
 Console.WriteLine($"quotient: {d}");
 Console.WriteLine($"remainder: {e}");
-The C# integer type differs from mathematical integers in one other way: the int type has minimum and maximum limits. Add this code to your Main method to see those limits:
+```
 
-C#
+The C# integer type differs from mathematical integers in one other way: the int type has minimum and maximum limits. Add this code to your `Main` method to see those limits:
 
-Copy
+```C#
 int max = int.MaxValue;
 int min = int.MinValue;
 Console.WriteLine(\$"The range of integers is {min} to {max}");
+```
+
 If a calculation produces a value that exceeds those limits, you have an underflow or overflow condition. The answer appears to wrap from one limit to the other. Add these two lines to your Main method to see an example:
 
-C#
-
-Copy
+```C#
 int what = max + 3;
 Console.WriteLine(\$"An example of overflow: {what}");
-Notice that the answer is very close to the minimum (negative) integer. It's the same as min + 2. The addition operation overflowed the allowed values for integers. The answer is a very large negative number because an overflow "wraps around" from the largest possible integer value to the smallest.
+```
+
+Notice that the answer is very close to the minimum (negative) integer. It's the same as `min + 2`. The addition operation overflowed the allowed values for integers. The answer is a very large negative number because an overflow "wraps around" from the largest possible integer value to the smallest.
 
 There are other numeric types with different limits and precision that you would use when the int type doesn't meet your needs. Let's explore those other types next.
 
-Once again, let's move the code you wrote in this section into a separate method. Name it TestLimits.
+Once again, let's move the code you wrote in this section into a separate method. Name it `TestLimits`.
 
-Work with the double type
+# Work with the double type
+
 The double numeric type represents a double-precision floating point number. Those terms may be new to you. A floating point number is useful to represent non-integral numbers that may be very large or small in magnitude. Double-precision is a relative term that describes the number of binary digits used to store the value. Double precision numbers have twice the number of binary digits as single-precision. On modern computers, it's more common to use double precision than single precision numbers. Single precision numbers are declared using the float keyword. Let's explore. Add the following code and see the result:
 
-C#
-
-Copy
+```C#
 double a = 5;
 double b = 4;
 double c = 2;
 double d = (a + b) / c;
 Console.WriteLine(d);
+```
+
 Notice that the answer includes the decimal portion of the quotient. Try a slightly more complicated expression with doubles:
 
-C#
-
-Copy
+```C#
 double e = 19;
 double f = 23;
 double g = 8;
 double h = (e + f) / g;
 Console.WriteLine(h);
+```
+
 The range of a double value is much greater than integer values. Try the following code below what you've written so far:
 
-C#
-
-Copy
+```C#
 double max = double.MaxValue;
 double min = double.MinValue;
 Console.WriteLine(\$"The range of double is {min} to {max}");
+
+```
+
 These values are printed out in scientific notation. The number to the left of the E is the significand. The number to the right is the exponent, as a power of 10.
 
 Just like decimal numbers in math, doubles in C# can have rounding errors. Try this code:
 
-C#
-
-Copy
+```C#
 double third = 1.0 / 3.0;
 Console.WriteLine(third);
+```
+
 You know that 0.3 repeating isn't exactly the same as 1/3.
 
-Challenge
+**Challenge**
 
 Try other calculations with large numbers, small numbers, multiplication, and division using the double type. Try more complicated calculations.
 
 After you've spent some time with the challenge, take the code you've written and place it in a new method. Name that new method WorkWithDoubles.
 
-Work with decimal types
+# Work with decimal types
+
 You've seen the basic numeric types in C#: integers and doubles. There's one other type to learn: the decimal type. The decimal type has a smaller range but greater precision than double. Let's take a look:
 
-C#
-
-Copy
+```C#
 decimal min = decimal.MinValue;
 decimal max = decimal.MaxValue;
 Console.WriteLine(\$"The range of the decimal type is {min} to {max}");
+```
+
 Notice that the range is smaller than the double type. You can see the greater precision with the decimal type by trying the following code:
 
-C#
-
-Copy
+```C#
 double a = 1.0;
 double b = 3.0;
 Console.WriteLine(a / b);
@@ -467,15 +482,17 @@ Console.WriteLine(a / b);
 decimal c = 1.0M;
 decimal d = 3.0M;
 Console.WriteLine(c / d);
+```
+
 The M suffix on the numbers is how you indicate that a constant should use the decimal type. Otherwise, the compiler assumes the double type.
 
-Note
-
-The letter M was chosen as the most visually distinct letter between the double and decimal keywords.
+> Note
+>
+> The letter M was chosen as the most visually distinct letter between the double and decimal keywords.
 
 Notice that the math using the decimal type has more digits to the right of the decimal point.
 
-Challenge
+**Challenge**
 
 Now that you've seen the different numeric types, write code that calculates the area of a circle whose radius is 2.50 centimeters. Remember that the area of a circle is the radius squared multiplied by PI. One hint: .NET contains a constant for PI, Math.PI that you can use for that value. Math.PI, like all constants declared in the System.Math namespace, is a double value. For that reason, you should use double instead of decimal values for this challenge.
 
@@ -499,10 +516,11 @@ Classes are the most fundamental of C#’s types. A class is a data structure th
 
 New classes are created using class declarations. A class declaration starts with a header. The header specifies:
 
-The attributes and modifiers of the class
-The name of the class
-The base class (when inheriting from a base class)
-The interfaces implemented by the class.
+- The attributes and modifiers of the class
+- The name of the class
+- The base class (when inheriting from a base class)
+- The interfaces implemented by the class.
+
 The header is followed by the class body, which consists of a list of member declarations written between the delimiters { and }.
 
 The following code shows a declaration of a simple class named Point:
@@ -529,8 +547,9 @@ var p2 = new Point(10, 20);
 
 The memory occupied by an object is automatically reclaimed when the object is no longer reachable. It's neither necessary nor possible to explicitly deallocate objects in C#.
 
-Type parameters
-Generic classes define type parameters. Type parameters are a list of type parameter names enclosed in angle brackets. Type parameters follow the class name. The type parameters can then be used in the body of the class declarations to define the members of the class. In the following example, the type parameters of Pair are TFirst and TSecond:
+# Type parameters
+
+Generic classes define [type parameters](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/generics/). Type parameters are a list of type parameter names enclosed in angle brackets. Type parameters follow the class name. The type parameters can then be used in the body of the class declarations to define the members of the class. In the following example, the type parameters of Pair are TFirst and TSecond:
 
 ```C#
 //Copy
@@ -584,7 +603,7 @@ Point b = new Point3D(10, 20, 30);
 
 ## Structs
 
-Classes define types that support inheritance and polymorphism. They enable you to create sophisticated behaviors based on hierarchies of derived classes. By contrast, struct types are simpler types whose primary purpose is to store data values. Structs can't declare a base type; they implicitly derive from System.ValueType. You can't derive other struct types from a struct type. They're implicitly sealed.
+Classes define types that support inheritance and polymorphism. They enable you to create sophisticated behaviors based on hierarchies of derived classes. By contrast, [struct](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/struct) types are simpler types whose primary purpose is to store data values. Structs can't declare a base type; they implicitly derive from System.ValueType. You can't derive other struct types from a struct type. They're implicitly sealed.
 
 ```C#
 //Copy
@@ -599,9 +618,9 @@ public struct Point
 
 ## Interfaces
 
-An interface defines a contract that can be implemented by classes and structs. An interface can contain methods, properties, events, and indexers. An interface typically doesn't provide implementations of the members it defines—it merely specifies the members that must be supplied by classes or structs that implement the interface.
+An [interface](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/interfaces/) defines a contract that can be implemented by classes and structs. An interface can contain methods, properties, events, and indexers. An interface typically doesn't provide implementations of the members it defines—it merely specifies the members that must be supplied by classes or structs that implement the interface.
 
-Interfaces may employ multiple inheritance. In the following example, the interface IComboBox inherits from both ITextBox and IListBox.
+Interfaces may employ **multiple inheritance**. In the following example, the interface IComboBox inherits from both ITextBox and IListBox.
 
 ```C#
 //Copy
@@ -650,7 +669,7 @@ IDataBound dataBound = editBox;
 
 ## Enums
 
-An Enum type defines a set of constant values. The following enum declares constants that define different root vegetables:
+An [Enum](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/enum) type defines a set of constant values. The following enum declares constants that define different root vegetables:
 
 ```C#
 //Copy
@@ -692,7 +711,7 @@ var theYear = Seasons.All;
 
 ## Nullable types
 
-Variables of any type may be declared as non-nullable or nullable. A nullable variable can hold an additional null value, indicating no value. Nullable Value types (structs or enums) are represented by System.Nullable<T>. Non-nullable and Nullable Reference types are both represented by the underlying reference type. The distinction is represented by metadata read by the compiler and some libraries. The compiler provides warnings when nullable references are dereferenced without first checking their value against null. The compiler also provides warnings when non-nullable references are assigned a value that may be null. The following example declares a nullable int, initializing it to null. Then, it sets the value to 5. It demonstrates the same concept with a nullable string. For more information, see nullable value types and nullable reference types.
+Variables of any type may be declared as non-nullable or nullable. A nullable variable can hold an additional null value, indicating no value. Nullable Value types (structs or enums) are represented by [System.Nullable<T>](https://docs.microsoft.com/en-us/dotnet/api/system.nullable-1). Non-nullable and Nullable Reference types are both represented by the underlying reference type. The distinction is represented by metadata read by the compiler and some libraries. The compiler provides warnings when nullable references are dereferenced without first checking their value against null. The compiler also provides warnings when non-nullable references are assigned a value that may be null. The following example declares a nullable int, initializing it to null. Then, it sets the value to 5. It demonstrates the same concept with a nullable string. For more information, see [nullable value types and nullable reference types](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/nullable-value-types).
 
 ```C#
 //Copy
@@ -705,7 +724,7 @@ optionalText = "Hello World.";
 
 ## Tuples
 
-C# supports tuples, which provides concise syntax to group multiple data elements in a lightweight data structure. You instantiate a tuple by declaring the types and names of the members between ( and ), as shown in the following example:
+C# supports [tuples](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples), which provides concise syntax to group multiple data elements in a lightweight data structure. You instantiate a tuple by declaring the types and names of the members between ( and ), as shown in the following example:
 
 ```C#
 //Copy
@@ -722,31 +741,35 @@ Tuples provide an alternative for data structure with multiple members, without 
 
 The types described in the previous article are built using these building blocks: members, expressions, and statements.
 
-Members
+# Members
 The members of a class are either static members or instance members. Static members belong to classes, and instance members belong to objects (instances of classes).
 
 The following list provides an overview of the kinds of members a class can contain.
 
-Constants: Constant values associated with the class
-Fields: Variables that are associated of the class
-Methods: Actions that can be performed by the class
-Properties: Actions associated with reading and writing named properties of the class
-Indexers: Actions associated with indexing instances of the class like an array
-Events: Notifications that can be generated by the class
-Operators: Conversions and expression operators supported by the class
-Constructors: Actions required to initialize instances of the class or the class itself
-Finalizers: Actions performed before instances of the class are permanently discarded
-Types: Nested types declared by the class
-Accessibility
+- Constants: Constant values associated with the class
+- Fields: Variables that are associated of the class
+- Methods: Actions that can be performed by the class
+- Properties: Actions associated with reading and writing named - properties of the class
+- Indexers: Actions associated with indexing instances of the class - like an array
+- Events: Notifications that can be generated by the class
+- Operators: Conversions and expression operators supported by the - class
+- Constructors: Actions required to initialize instances of the - class or the class itself
+- Finalizers: Actions performed before instances of the class are - permanently discarded
+- Types: Nested types declared by the class
+
+# Accessibility
+
 Each member of a class has an associated accessibility, which controls the regions of program text that can access the member. There are six possible forms of accessibility. The access modifiers are summarized below.
 
-public: Access isn't limited.
-private: Access is limited to this class.
-protected: Access is limited to this class or classes derived from this class.
-internal: Access is limited to the current assembly (.exe or .dll).
-protected internal: Access is limited to this class, classes derived from this class, or classes within the same assembly.
-private protected: Access is limited to this class or classes derived from this type within the same assembly.
-Fields
+- public: Access isn't limited.
+- private: Access is limited to this class.
+- protected: Access is limited to this class or classes derived from - this class.
+- internal: Access is limited to the current assembly (.exe or .dll).
+- protected internal: Access is limited to this class, classes - derived from this class, or classes within the same assembly.
+- private protected: Access is limited to this class or classes derived from this type within the same assembly.
+
+# Fields
+
 A field is a variable that is associated with a class or with an instance of a class.
 
 A field declared with the static modifier defines a static field. A static field identifies exactly one storage location. No matter how many instances of a class are created, there's only ever one copy of a static field.
@@ -805,7 +828,7 @@ A value parameter is used for passing input arguments. A value parameter corresp
 
 Value parameters can be optional, by specifying a default value so that corresponding arguments can be omitted.
 
-A reference parameter is used for passing arguments by reference. The argument passed for a reference parameter must be a variable with a definite value. During execution of the method, the reference parameter represents the same storage location as the argument variable. A reference parameter is declared with the ref modifier. The following example shows the use of ref parameters.
+A reference parameter is used for passing arguments by reference. The argument passed for a reference parameter must be a variable with a definite value. During execution of the method, the reference parameter represents the same storage location as the argument variable. A reference parameter is declared with the `ref` modifier. The following example shows the use of `ref` parameters.
 
 ```C#
 //Copy
@@ -824,7 +847,7 @@ public static void SwapExample()
 }
 ```
 
-An output parameter is used for passing arguments by reference. It's similar to a reference parameter, except that it doesn't require that you explicitly assign a value to the caller-provided argument. An output parameter is declared with the out modifier. The following example shows the use of out parameters using the syntax introduced in C# 7.
+An `output` parameter is used for passing arguments by reference. It's similar to a reference parameter, except that it doesn't require that you explicitly assign a value to the caller-provided argument. An output parameter is declared with the out modifier. The following example shows the use of out parameters using the syntax introduced in C# 7.
 
 ```C#
 //Copy
@@ -946,7 +969,7 @@ class Entity
 }
 ```
 
-Each Entity instance contains a serial number (and presumably some other information that isn't shown here). The Entity constructor (which is like an instance method) initializes the new instance with the next available serial number. Because the constructor is an instance member, it's permitted to access both the \_serialNo instance field and the s_nextSerialNo static field.
+Each `Entity` instance contains a serial number (and presumably some other information that isn't shown here). The Entity constructor (which is like an instance method) initializes the new instance with the next available serial number. Because the constructor is an instance member, it's permitted to access both the \_serialNo instance field and the s_nextSerialNo static field.
 
 The GetNextSerialNo and SetNextSerialNo static methods can access the s_nextSerialNo static field, but it would be an error for them to directly access the \_serialNo instance field.
 
@@ -976,8 +999,8 @@ An _abstract_ method is a virtual method with no implementation. An abstract met
 
 The following example declares an abstract class, `Expression`, which represents an expression tree node, and three derived classes, `Constant`, `VariableReference`, and `Operation`, which implement expression tree nodes for constants, variable references, and arithmetic operations. (This example is similar to, but not related to the expression tree types).
 
-````C#
-//Copy
+```C#
+
 public abstract class Expression
 {
     public abstract double Evaluate(Dictionary<string, object> vars);
@@ -1042,15 +1065,16 @@ public class Operation : Expression
         }
     }
 }
+```
+
 The previous four classes can be used to model arithmetic expressions. For example, using instances of these classes, the _expression_ `x + 3` can be represented as follows.
 
 ```C#
-//Copy
 Expression e = new Operation(
     new VariableReference("x"),
     '+',
     new Constant(3));
-````
+```
 
 The `Evaluate` method of an `Expression` instance is invoked to evaluate the given expression and produce a double value. The method takes a `Dictionary` argument that contains variable names (as keys of the entries) and values (as values of the entries). Because `Evaluate` is an abstract method, non-abstract classes derived from `Expression` must override `Evaluate`.
 
@@ -1059,7 +1083,7 @@ A Constant's implementation of `Evaluate` simply returns the stored constant. A 
 The following program uses the `Expression` classes to evaluate the expression `x * (y + 2)` for different values of `x` and `y`.
 
 ```C#
-//Copy
+
 Expression e = new Operation(
     new VariableReference("x"),
     '*',
@@ -1085,7 +1109,6 @@ Console.WriteLine(e.Evaluate(vars)); // "16.5"
 Method _overloading_ permits multiple methods in the same class to have the same name as long as they have unique signatures. When compiling an invocation of an overloaded method, the compiler uses _overload resolution_ to determine the specific method to invoke. Overload resolution finds the one method that best matches the arguments. If no single best match can be found, an error is reported. The following example shows overload resolution in effect. The comment for each invocation in the `UsageExample` method shows which method is invoked.
 
 ```C#
-//Copy
 class OverloadingExample
 {
     static void F() => Console.WriteLine("F()");
@@ -1622,6 +1645,3 @@ if (displayMethodAttributes.Length > 0)
 
 [Introduction to C# Tutorials](https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/intro-to-csharp/)
 
-```
-
-```

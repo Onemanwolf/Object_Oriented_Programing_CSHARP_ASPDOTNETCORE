@@ -1,0 +1,16 @@
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\net5.0\AsyncBreakfast.exe
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\net5.0\AsyncBreakfast.deps.json
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\net5.0\AsyncBreakfast.runtimeconfig.json
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\net5.0\AsyncBreakfast.runtimeconfig.dev.json
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\net5.0\AsyncBreakfast.dll
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\net5.0\ref\AsyncBreakfast.dll
+C:\AsyncLabBreakFast\src\AsyncBreakfast\bin\Debug\net5.0\AsyncBreakfast.pdb
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\AsyncBreakfast.csprojAssemblyReference.cache
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\AsyncBreakfast.GeneratedMSBuildEditorConfig.editorconfig
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\AsyncBreakfast.AssemblyInfoInputs.cache
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\AsyncBreakfast.AssemblyInfo.cs
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\AsyncBreakfast.csproj.CoreCompileInputs.cache
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\AsyncBreakfast.dll
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\ref\AsyncBreakfast.dll
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\AsyncBreakfast.pdb
+C:\AsyncLabBreakFast\src\AsyncBreakfast\obj\Debug\net5.0\AsyncBreakfast.genruntimeconfig.cache
