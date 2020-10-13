@@ -508,6 +508,12 @@ Integral numeric types
 Floating-point numeric types
 Built-in numeric conversions
 
+# Strings
+
+[Strings (C# Programming Guide)](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/strings/)
+
+
+
 # Types and members
 
 ## Classes and objects
