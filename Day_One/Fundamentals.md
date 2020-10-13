@@ -27,12 +27,12 @@ The following outline provides an overview of C#'s type system.
 - Reference types
 
   - Class types
-  - Ultimate base class of all other types: object
+    - Ultimate base class of all other types: object
 
   - Unicode strings: string, which represents a sequence of UTF-16 code units
-  - User-defined types of the form class C {...}
+    - User-defined types of the form class C {...}
   - Interface types
-  - User-defined types of the form interface I {...}
+    - User-defined types of the form interface I {...}
   - Array types
     - Single-dimensional, multi-dimensional and jagged. For example: int[], int[,], and int[][]
   - Delegate types
